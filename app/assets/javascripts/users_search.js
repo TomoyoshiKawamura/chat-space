@@ -22,11 +22,8 @@ var assign_user_list = $("#chat-group-users")
     `
     user_list.append(html);
   }
-
-
   $(".chat-group-form__search.clearfix").on("keyup", function() {
     var input = $("#user-search-field.chat-group-form__input").val();
-    // console.log(input);
         $.ajax({
       type: 'GET',
       url: '/users/',
@@ -47,7 +44,6 @@ var assign_user_list = $("#chat-group-users")
     alert('検索に失敗しました');
         })
   });
-
   $('#user-search-result').on('click','.chat-group-user__btn--add',function(){
     var user_id = $(this).attr('data-user-id');
     var user_name = $(this).attr('data-user-name');
