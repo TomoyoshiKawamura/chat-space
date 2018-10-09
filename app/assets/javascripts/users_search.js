@@ -1,7 +1,18 @@
 $(function() {
 
-var user_list = $(".chat-group-user__name ")
+var user_list = $("#user-search-result")
+var assign_user_list = $("#chat-group-users")
 
+  function append_assign_list(user_id,user_name){
+    var html = `
+    <div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+      <input name='group[user_ids][]' type='hidden' value='${user_id}'>
+      <p class='chat-group-user__name'>${user_name}</p>
+      <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
+    </div>
+    `
+    assign_user_list.append(html);
+  }
   function appendList(user){
     var html = `
 <div class="chat-group-user clearfix">
@@ -23,7 +34,6 @@ var user_list = $(".chat-group-user__name ")
       dataType: 'json'
     })
         .done(function(users){
-        $(".chat-group-user__name").empty();
           if(users.length !== 0){
             users.forEach(function(user){
               appendList(user);
@@ -33,5 +43,19 @@ var user_list = $(".chat-group-user__name ")
             console.log("nothing")
           }
         })
+        .fail(function(){
+    alert('検索に失敗しました');
+        })
   });
+
+  $('#user-search-result').on('click','.chat-group-user__btn--add',function(){
+    var user_id = $(this).attr('data-user-id');
+    var user_name = $(this).attr('data-user-name');
+    append_assign_list(user_id,user_name)
+  });
+
+  $('#chat-group-users').on('click','.js-remove-btn',function(){
+    $(this).parent().remove();
+  })
+
 });
