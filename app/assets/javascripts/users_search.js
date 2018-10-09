@@ -51,7 +51,8 @@ var assign_user_list = $("#chat-group-users")
   $('#user-search-result').on('click','.chat-group-user__btn--add',function(){
     var user_id = $(this).attr('data-user-id');
     var user_name = $(this).attr('data-user-name');
-    append_assign_list(user_id,user_name)
+    append_assign_list(user_id,user_name);
+    $(this).parent().remove();
   });
 
   $('#chat-group-users').on('click','.js-remove-btn',function(){
