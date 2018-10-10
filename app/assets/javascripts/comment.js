@@ -13,7 +13,6 @@ ${message.user_name}
 <p class="lower-message__content">
 ${message.content}
 </p>
-
 </div>
 </div>`
 $('.messages').append(html)
